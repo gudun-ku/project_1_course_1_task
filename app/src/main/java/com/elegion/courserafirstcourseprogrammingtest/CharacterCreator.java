@@ -1,7 +1,10 @@
 package com.elegion.courserafirstcourseprogrammingtest;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
@@ -45,18 +48,25 @@ public class CharacterCreator extends Observable  implements Serializable{
 
 
     public String[] getSpecializations() {
-        // TODO: 11.12.2017
+        // TO-DO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Specialization
         *   Строки должны начинаться с заглавной буквы, остальные строчные
         * */
 
-        return new String[]{""};
+        //return new String[]{""};
 
+        /*        String[] outArray =  Arrays.toString(Specialization.values()).replaceAll("^.|.$", "").split(", ");
+        for (int i = 0; i < outArray.length; i++) {
+            outArray[i] = outArray[i].substring(0, 1).toUpperCase() + outArray[i].substring(1);
+        }
+        return outArray;*/
+
+        return enumValues(Specialization.class);
     }
 
     public void setSpecialization(int position) {
-        // TODO: 11.12.2017
+        // TO-DO: 11.12.2017
         /*
         *  этот метод задает специализацию в переменную mSpecialization
         *  на вход подается число, и из enum Specialization выбирается соответствующий класс
@@ -68,17 +78,38 @@ public class CharacterCreator extends Observable  implements Serializable{
         *
         * */
 
+
+
+        if (position < 0 ) {
+            mSpecialization = Specialization.values()[0];
+        } else if (position > Specialization.values().length) {
+            mSpecialization = Specialization.values()[Specialization.values().length - 1];
+        } else {
+            mSpecialization = Specialization.values()[position];
+        }
+
     }
 
+    public <T extends Enum<T>> String[] enumValues(Class<T> enumType) {
+        List<String> lOut = new ArrayList<>();
+        for (T c : enumType.getEnumConstants()) {
+           lOut.add(c.name().substring(0,1).toUpperCase() + c.name().substring(1));
+        }
+        return (String[]) lOut.toArray();
+    }
+
+
     public String[] getRaces() {
-        // TODO: 11.12.2017
+        // TO-DO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Races
         *    Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         * */
 
-        return new String[]{""};
+        //return new String[]{""};
+
+        return enumValues(Race.class);
     }
 
     public void setRace(int position) {
@@ -98,13 +129,15 @@ public class CharacterCreator extends Observable  implements Serializable{
 
     public String[] getAttributes() {
 
-        // TODO: 11.12.2017
+        // TO-DO: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Attribute
         *    Строка должна быть формата - первая буква заглавная, остальные строчные
         *   One, Two, Three
         * */
-        return new String[]{""};
+        //return new String[]{""};
+
+        return enumValues(Attribute.class);
 
     }
 
@@ -117,7 +150,9 @@ public class CharacterCreator extends Observable  implements Serializable{
         *
         * */
 
-        return new String[]{""};
+        //return new String[]{""};
+
+        return enumValues(Perk.class);
 
     }
     public void updateAttributeValue(int position, int updateTo) {
