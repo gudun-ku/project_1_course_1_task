@@ -113,7 +113,7 @@ public class CharacterCreator extends Observable  implements Serializable{
     }
 
     public void setRace(int position) {
-        // TODO: 11.12.2017
+        // ALMOST: 11.12.2017
         /*
         *  этот метод задает специализацию в переменную mRace
         *  на вход подается число, и из enum Race выбирается соответствующая раса
@@ -125,6 +125,10 @@ public class CharacterCreator extends Observable  implements Serializable{
         *  если введенное число больше длины enum, то в mRace записывается самое последнее (длина - 1) значение
         *
         * */
+
+        if (position < 0) position = 0;
+        if (position > Race.values().length) position = Race.values().length -1;
+        mRace = Race.values()[position];
     }
 
     public String[] getAttributes() {
@@ -142,7 +146,7 @@ public class CharacterCreator extends Observable  implements Serializable{
     }
 
     public String[] getPerks() {
-        // TODO: 11.12.2017
+        // COMPLETED: 11.12.2017
         /*
         *   этот метод должен возвращать массив строк, созданных на основе enum Perk
         *   Строка должна быть формата - первая буква заглавная, остальные строчные
