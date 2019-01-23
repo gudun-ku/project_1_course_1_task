@@ -93,7 +93,7 @@ public class CharacterCreator extends Observable  implements Serializable{
     public <T extends Enum<T>> String[] enumValues(Class<T> enumType) {
         List<String> lOut = new ArrayList<String>();
         for (T c : enumType.getEnumConstants()) {
-           lOut.add((String) c.name().substring(0,1).toUpperCase() + c.name().substring(1));
+           lOut.add((String) c.name().substring(0,1).toUpperCase() + c.name().substring(1).toLowerCase());
         }
         return  lOut.toArray(new String[0]);
     }
@@ -196,15 +196,23 @@ public class CharacterCreator extends Observable  implements Serializable{
         *       то мы не можем увеличить атрибут, ничего не происходит        *
         * */
 
-        String attrName = Attribute.values()[position].name();
-        int currAttrVal = mAttributesMap.get(attrName);
-        int availPoints = mAvailablePoints - updateTo;
-        if (availPoints >= 0) {
-            currAttrVal += updateTo;
-            mAttributesMap.put(attrName,currAttrVal);
-            mAvailablePoints = availPoints;
-            setChanged();
-            notifyObservers();
+        Attribute[] attributes = Attribute.values();
+
+        if (attributes.length > position) {
+
+            String attrName = Attribute.values()[position].name();
+            int currAttrVal = mAttributesMap.get(attrName);
+            updateTo = currAttrVal + updateTo > 0 ? updateTo : 0;
+            int availPoints = mAvailablePoints - updateTo;
+
+            if (availPoints >= 0) {
+                currAttrVal += updateTo;
+                mAttributesMap.put(attrName, currAttrVal);
+                mAvailablePoints = availPoints;
+                setChanged();
+                notifyObservers();
+            }
+
         }
 
     }
