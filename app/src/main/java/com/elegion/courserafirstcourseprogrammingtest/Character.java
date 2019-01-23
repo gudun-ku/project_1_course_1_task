@@ -96,39 +96,39 @@ public class Character implements Serializable {
         mCriticalHitChance = mAttributesMap.get(CharacterCreator.Attribute.LUCK.name()) * CRITICAL_ATTACK_SEED + mClassParameter;
         mHitPoints = mAttributesMap.get(CharacterCreator.Attribute.STAMINA.name()) * HP_SEED + mClassParameter;
 
-        Boolean isBerserk = mPerks.get(CharacterCreator.Perk.BERSERK.name());
+        Boolean isBerserk = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.BERSERK.name()));
         if (isBerserk != null && isBerserk) {
             mAttack *= 1.1;
             mPhysicalDefense *= 0.85;
             mMagicDefense *= 0.85;
         }
 
-        Boolean isCalm = mPerks.get(CharacterCreator.Perk.CALM.name());
+        Boolean isCalm = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.CALM.name()));
         if (isCalm != null && isCalm) {
             mAttack *= 0.85;
             mPhysicalDefense *= 1.1;
             mMagicDefense *= 1.1;
         }
 
-        Boolean isLigthWeight = mPerks.get(CharacterCreator.Perk.LIGHTWEIGHT.name());
+        Boolean isLigthWeight = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.LIGHTWEIGHT.name()));
         if (isLigthWeight != null && isLigthWeight) {
             mDodge *= 1.1;
             mPhysicalDefense *= 0.85;
         }
 
-        Boolean isHeavyArmored = mPerks.get(CharacterCreator.Perk.HEAVYARMORED.name());
+        Boolean isHeavyArmored = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.HEAVYARMORED.name()));
         if (isHeavyArmored != null && isHeavyArmored) {
             mPhysicalDefense *= 1.1;
             mDodge *= 0.85;
         }
 
-        Boolean isMeditations = mPerks.get(CharacterCreator.Perk.MEDITATIONS.name());
+        Boolean isMeditations = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.MEDITATIONS.name()));
         if (isMeditations != null && isMeditations) {
             mMagicDefense *= 1.1;
             mCriticalHitChance *= 0.85;
         }
 
-        Boolean isObservant = mPerks.get(CharacterCreator.Perk.OBSERVANT.name());
+        Boolean isObservant = mPerks.get(CharacterCreator.formatName(CharacterCreator.Perk.OBSERVANT.name()));
         if (isObservant != null && isObservant) {
             mCriticalHitChance *= 1.1;
             mMagicDefense *= 0.85;

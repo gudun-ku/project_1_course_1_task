@@ -90,14 +90,19 @@ public class CharacterCreator extends Observable  implements Serializable{
 
     }
 
+    // helper functions ------------------ beloushkin 23.01.2019 --------------------------->
+    public static String formatName(String name) {
+        return name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+
     public <T extends Enum<T>> String[] enumValues(Class<T> enumType) {
         List<String> lOut = new ArrayList<String>();
         for (T c : enumType.getEnumConstants()) {
-           lOut.add((String) c.name().substring(0,1).toUpperCase() + c.name().substring(1).toLowerCase());
+           lOut.add(formatName(c.name()));
         }
         return  lOut.toArray(new String[0]);
     }
-
+    // helper functions ------------------ beloushkin 23.01.2019 ---------------------------<
 
     public String[] getRaces() {
         // TO-DO: 11.12.2017
